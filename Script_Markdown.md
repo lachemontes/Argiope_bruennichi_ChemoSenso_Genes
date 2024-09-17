@@ -1412,30 +1412,3 @@ print(plot)
 
 
 
-#### Map
-
-```{r}
-# Load necessary libraries
-library(maps)
-library(ggplot2)
-
-# Get map data for the world
-world_map <- map_data("world")
-
-# Filter for specific regions: Europe, North Africa, parts of Asia
-desired_regions <- c("portugal", "spain", "france", "italy", "germany", "morocco", "algeria", "tunisia", "egypt", "turkey")
-european_countries <- world_map[world_map$region %in% desired_regions, ]
-
-# Azores archipelago coordinates
-azores <- data.frame(long = -25.0, lat = 37.8)  # Adjust the coordinates as needed
-
-# Plotting the map with colored countries
-ggplot() +
-  geom_polygon(data = world_map, aes(x = long, y = lat, group = group), fill = "lightgray", color = "black") +
-  geom_polygon(data = european_countries, aes(x = long, y = lat, group = group, fill = region), color = "black") +
-  geom_point(data = azores, aes(x = long, y = lat), color = "red", size = 3) +
-  labs(title = "Map of Europe, North Africa, Parts of Asia, and the Azores Archipelago") +
-  scale_fill_manual(values = rep("lightblue", length(desired_regions))) +
-  theme_minimal()
-
-```
